@@ -20,12 +20,18 @@ def is_board_full(board):
     return all([cell != " " for row in board for cell in row])
 
 def tic_tac_toe():
-    board = [[" " for _ in range(3)] for _ in range(3)]
+    # Get player names
+    player1 = input("Enter Player 1's name (X): ")
+    player2 = input("Enter Player 2's name (O): ")
+    players = {"X": player1, "O": player2}
     current_player = "X"
+
+    # Initialize the board
+    board = [[" " for _ in range(3)] for _ in range(3)]
 
     while True:
         print_board(board)
-        print(f"Player {current_player}'s turn")
+        print(f"{players[current_player]}'s turn ({current_player})")
 
         try:
             row = int(input("Enter the row (0, 1, 2): "))
@@ -46,7 +52,7 @@ def tic_tac_toe():
 
         if check_winner(board, current_player):
             print_board(board)
-            print(f"Player {current_player} wins!")
+            print(f"Congratulations {players[current_player]}! You win!")
             break
 
         if is_board_full(board):
@@ -54,6 +60,7 @@ def tic_tac_toe():
             print("It's a tie!")
             break
 
+        # Switch players
         current_player = "O" if current_player == "X" else "X"
 
 if __name__ == "__main__":
